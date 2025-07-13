@@ -1,9 +1,12 @@
-FROM openjdk:17-jdk-alpine
+FROM eclipse-temurin:17-jdk-alpine
 
 WORKDIR /opt/Lavalink
 
-COPY . .
+RUN apk add --no-cache curl
 
-RUN ./gradlew build -x test
+COPY ./Lavalink.jar ./Lavalink.jar
+COPY ./src/main/resources/application.yml ./application.yml
 
-CMD ["java", "-jar", "Lavalink.jar"]
+EXPOSE 2333
+
+CMD ["java", "-Dfile.encoding=UTF-8", "-jar", "Lavalink.jar"]
