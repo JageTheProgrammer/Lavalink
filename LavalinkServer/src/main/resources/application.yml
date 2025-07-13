@@ -1,14 +1,15 @@
-spring:
-  application:
-    version: "1.0"
-    formatted-version: "(v1.0)"
-    name: "Lavalink"
-  cloud:
-    config:
-      enabled: false
 server:
-  error:
-    include-message: ALWAYS
-    include-binding-errors: ALWAYS
-    include-stacktrace: ON_PARAM
-    include-exception: false
+  port: ${PORT}
+
+lavalink:
+  server:
+    password: ${LAVALINK_PASSWORD}
+    sources:
+      youtube: true
+      bandcamp: true
+      soundcloud: true
+    bufferDurationMs: 400
+    resamplingQuality: HIGH
+    volume: 100
+    maxTracks: 10000
+    maxTrackLength: 600000
