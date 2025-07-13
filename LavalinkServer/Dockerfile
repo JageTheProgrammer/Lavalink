@@ -1,16 +1,17 @@
-FROM openjdk:11-jdk-slim
+# Use OpenJDK 17, required for Lavalink v4
+FROM openjdk:17-slim
 
 # Set working directory
 WORKDIR /app
 
-# Copy everything into the container
+# Copy everything
 COPY . .
 
-# Grant permission to gradlew
+# Make gradlew executable
 RUN chmod +x ./gradlew
 
-# Build the Lavalink jar
-RUN ./gradlew shadowJar
+# Build Lavalink using Spring Boot (not shadowJar!)
+RUN ./gradlew bootJar
 
-# Set the entrypoint to run Lavalink
+# Run the Lavalink JAR
 CMD ["java", "-Dlogback.configurationFile=logback.xml", "-jar", "build/libs/Lavalink.jar"]
